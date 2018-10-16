@@ -5,7 +5,7 @@ class GenreChart extends Component {
     render() {
         const data = {
             labels: [
-                'Rock',
+                'Hip-Hop',
                 'Jazz',
                 'Reggae'
             ],
@@ -25,8 +25,8 @@ class GenreChart extends Component {
         };
 
         return (
-            <div>
-                <Pie data={data} />
+            <div style={{display: "inline-block"}}>
+                <Pie data={data} height={250} width={300}/>
             </div>
         );
     }

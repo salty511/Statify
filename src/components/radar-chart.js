@@ -7,7 +7,7 @@ class AudioFeaturesChart extends Component {
             labels: ['Danceability', 'Acousiticness', 'Energy', 'Instrumentalness', 'Loudness'],
             datasets: [
               {
-                label: 'My First dataset',
+                label: 'Mean Value from your music',
                 backgroundColor: 'rgba(176,58,46,0.2)',
                 borderColor: 'rgba(179,181,198,1)',
                 pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -19,8 +19,8 @@ class AudioFeaturesChart extends Component {
             ]
           };
         return (
-            <div>
-                <Radar data={data} />
+            <div style={{display: "inline-block"}}>
+                <Radar data={data} height={250} width={300}/>
             </div>
         );
     }
