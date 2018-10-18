@@ -5,6 +5,9 @@ import TimeFrameButtons from './components/time-frame-buttons';
 import GenreChart from './components/pie-chart';
 import AudioFeaturesChart from './components/radar-chart';
 import Recommendations from "./components/recommendations";
+import { defaults } from 'react-chartjs-2';
+
+defaults.global.legend.labels.fontColor = "#EBEBEB";
 
 class App extends Component {
   render() {
@@ -27,7 +30,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container" style={{"padding-bottom": "10px"}}>
           <h2>Recommendations</h2>
           <p />
           <Recommendations />

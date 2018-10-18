@@ -3,6 +3,16 @@ import { Radar } from 'react-chartjs-2';
 
 class AudioFeaturesChart extends Component {
     render() {
+        const options = {
+            scale: {
+                ticks: {
+                    backdropColor: '#2B3E50',
+                },
+                pointLabels: {
+                    fontColor: "#EBEBEB"
+                }
+            }
+        }
         const data = {
             labels: ['Danceability', 'Acousiticness', 'Energy', 'Instrumentalness', 'Loudness'],
             datasets: [
@@ -20,7 +30,7 @@ class AudioFeaturesChart extends Component {
           };
         return (
             <div style={{display: "inline-block"}}>
-                <Radar data={data} height={250} width={300}/>
+                <Radar data={data} height={250} width={300} options={options}/>
             </div>
         );
     }

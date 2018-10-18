@@ -7,17 +7,15 @@ class Album extends Component {
         return (
             <div className="card">
                 <img className="card-img-top" src={image} alt="Card cap" /> 
-                 <div className="card-body">
-                     <h5 className="card-title">Album Name</h5>
-                     <p className="card-text">
+                <div className="card-body">
+                    <h5 className="card-title">Album Name</h5>
+                    <p className="card-text">
                         <ul style={{"text-align": "left", "list-style": "none"}}>
-                            <li>Song 1</li>
-                            <li>Song 2</li>
-                            <li>Song 3</li>
+                            <li>Top Song</li>
                         </ul>
                     </p>
                 </div>
-    </div>
+            </div>
         );
     }
 }
