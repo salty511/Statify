@@ -14,7 +14,7 @@ class AudioFeaturesChart extends Component {
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(179,181,198,1)',
-                data: [65, 59, 90, 81, 56]
+                data: [17, 3, 4, 10, 20]
               },
             ]
           };

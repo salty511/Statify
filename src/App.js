@@ -4,28 +4,33 @@ import UserInfo from "./components/user-info";
 import TimeFrameButtons from './components/time-frame-buttons';
 import GenreChart from './components/pie-chart';
 import AudioFeaturesChart from './components/radar-chart';
-import Album from "./components/albums";
+import Recommendations from "./components/recommendations";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <p />
-        <div className="container">
+        <div className="container" style={{"padding-top": "10px"}}>
           <h1 style={{"font-size": "50px"}}>Statify</h1>
           <TimeFrameButtons />
         </div>
-        <div className="container" style={{height:"300px"}}>
-          <UserInfo />
-          <GenreChart />
-          <AudioFeaturesChart />
+        <div className="container" style={{"padding-bottom": "30px", "padding-top": "30px"}}>
+          <div className="row">
+            <div className="col">
+              <UserInfo />
+            </div>
+            <div className="col">
+              <GenreChart />
+            </div>
+            <div className="col">
+              <AudioFeaturesChart />
+            </div>
+          </div>
         </div>
         <div className="container">
           <h2>Recommendations</h2>
-          <Album />
-          <Album />
-          <Album />
-          <Album />
+          <p />
+          <Recommendations />
         </div>
       </div>
     );

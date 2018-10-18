@@ -5,8 +5,8 @@ class UserInfo extends Component {
     const image =
       "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180";
     return (
-    <div className="card" style={{display: "inline-block", float: "left"}}>
-      <img className="card-img-top" src={image} alt="Card image cap" /> 
+    <div className="card">
+      <img className="card-img-top" src={image} alt="Card cap" /> 
       <div className="card-body">
         <h5 className="card-title">UserName</h5>
         <p className="card-text">UserInfo</p>
