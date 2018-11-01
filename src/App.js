@@ -8,8 +8,22 @@ import Recommendations from "./components/recommendations";
 import { defaults } from 'react-chartjs-2';
 
 defaults.global.legend.labels.fontColor = "#EBEBEB";
+let fakeServerData = {
+  user: {
+    userName: 'Isaac'
+  },
+}
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {serverData: {}}
+  }
+
+  componentDidMount(){
+    this.setState({serverData: fakeServerData})
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,7 +34,8 @@ class App extends Component {
         <div className="container" style={{"padding-bottom": "30px", "padding-top": "30px"}}>
           <div className="row">
             <div className="col">
-              <UserInfo />
+              <UserInfo userName={this.state.serverData.user &&
+              this.state.serverData.user.userName}/>
             </div>
             <div className="col">
               <GenreChart />
