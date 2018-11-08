@@ -2,18 +2,12 @@ import React, { Component } from "react";
 
 class Album extends Component {
     render(){
-        const image = 
-            "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180";
         return (
             <div className="card">
-                <img className="card-img-top" src={image} alt="Card cap" /> 
+                <img className="card-img-top" src={this.props.trackInfo.image} alt="Card cap" /> 
                 <div className="card-body">
-                    <h5 className="card-title">Album Name</h5>
-                    <p className="card-text">
-                        <ul style={{"text-align": "left", "list-style": "none"}}>
-                            <li>Top Song</li>
-                        </ul>
-                    </p>
+                    <h5 className="card-title">{this.props.trackInfo.albumName}</h5>
+                    <h6 className="card-subtitle">{this.props.trackInfo.artists[0]} - {this.props.trackInfo.trackName}</h6>
                 </div>
             </div>
         );
