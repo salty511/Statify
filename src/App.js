@@ -24,10 +24,10 @@ let fakeServerData = {
     {albumName: "Telefone", trackName: "Diddy Bop", artists: ["Noname"], image: "https://i.scdn.co/image/9f2bf647257bec75bc3981c4438049aac7c50dcb"},
   ],
   audioFeatures: [
-    {danceability: 10, loudness: 2, instrumentalness: 4, energy: 5, acousticness: 7},
-    {danceability: 6, loudness: 3, instrumentalness: 8, energy: 9, acousticness: 5},
-    {danceability: 7, loudness: 5, instrumentalness: 6, energy: 2, acousticness: 5},
-    {danceability: 8, loudness: 10, instrumentalness: 9, energy: 7, acousticness: 2},
+    {Danceability: 10, Loudness: 7, Energy: 1, Instrumentalness: 8, Acousticness: 9},
+    {Danceability: 6, Loudness: 6, Energy: 4, Instrumentalness: 9, Acousticness: 2},
+    {Danceability: 7, Loudness: 5, Energy: 6, Instrumentalness: 6, Acousticness: 1},
+    {Danceability: 8, Loudness: 10, Energy: 3, Instrumentalness: 7, Acousticness: 2},
   ]
 }
 
@@ -44,13 +44,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="container" style={{"padding-top": "10px"}}>
-          <h1 style={{"font-size": "50px"}}>Statify</h1>  
+        <div className="container" style={{paddingTop: "10px"}}>
+          <h1 style={{fontSize: "50px"}}>Statify</h1>  
           <TimeFrameButtons />
         </div>
-        <div className="container" style={{"padding-bottom": "30px", "padding-top": "30px"}}>
+        <div className="container" style={{paddingBottom: "30px", paddingTop: "30px"}}>
           <div className="row">
-            <div className="col">
+            <div className="col" style={{paddingRight: "20px", paddingLeft: "20px"}}>
+              {/* Check for user before rendering UserInfo */}
               {this.state.serverData.user &&
               <UserInfo userDetails={this.state.serverData.user} />}
             </div>
@@ -58,13 +59,15 @@ class App extends Component {
               <GenreChart />
             </div>
             <div className="col">
-              <AudioFeaturesChart />
+              {this.state.serverData.audioFeatures &&
+              <AudioFeaturesChart audioFeaturesData={this.state.serverData.audioFeatures}/>}
             </div>
           </div>
         </div>
-        <div className="container" style={{"padding-bottom": "10px"}}>
+        <div className="container" style={{paddingBottom: "10px"}}>
           <h2>Top Tracks</h2>
-          <div className="row" style={{"padding-top": "10px"}}>
+          <div className="row" style={{paddingTop: "10px"}}>
+            {/* Check for topTracks before rendering & create Album component for each track */}
             {this.state.serverData.topTracks &&
             this.state.serverData.topTracks.map(track => {
               return (<div className="col"><Album trackInfo={track}/></div>)
