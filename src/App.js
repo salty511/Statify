@@ -14,8 +14,16 @@ let fakeServerData = {
     profileImage: "https://profile-images.scdn.co/images/userprofile/default/e2494c401e80df70de5ced15808aedd3347a8d19"
   },
   topArtists: [
-    {artistName: "", genre: ""},
-    {artistName: "", genre: ""}
+    {artistName: "Noname", genres: ["escape room", "hip hop", "indie r&b", "rap", "underground hip hop"]},
+    {artistName: "Rex Orange County", genres: ["indie r&b"]},
+    {artistName: "Yeek", genres: ["indie r&b", "lo-fi beats"]},
+    {artistName: "Isaiah Rashad", genres: ["hip hop", "indie r&b", "pop rap", "rap", "southern hip hop", "underground hip hop"]},
+    {artistName: "J.I.D", genres: ["hip hop", "rap", "underground hip hop", ]},
+    {artistName: "BROCKHAMPTON", genres: ["boy band", "hip hop", "indie r&b", "rap"]},
+    {artistName: "JMSN", genres: ["indie r&b"]},
+    {artistName: "Kendrick Lamar", genres: ["consious hip hop", "hip hop", "pop rap", "rap", "west coast rap"]},
+    {artistName: "King Krule", genres: ["art pop", "indie r&b", "indie rock", "indietronica", "neo-psychedelic"]},
+    {artistName: "Ravyn Lenae", genres: ["escape room", "indie r&b", "neo soul", "r&b"]}
   ],
   topTracks: [
     {albumName: "Crush", trackName: "Crush", artists: ["Tessa Violet"], image: "https://i.scdn.co/image/91a6e39aa1be0230f06b7d8c640e562175dfec03"},
@@ -56,7 +64,8 @@ class App extends Component {
               <UserInfo userDetails={this.state.serverData.user} />}
             </div>
             <div className="col">
-              <GenreChart />
+              {this.state.serverData.topArtists &&
+              <GenreChart genreData={this.state.serverData.topArtists}/>}
             </div>
             <div className="col">
               {this.state.serverData.audioFeatures &&

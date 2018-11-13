@@ -8,7 +8,7 @@ class AudioFeaturesChart extends Component {
         for(let dataSet of this.props.audioFeaturesData) {
             for(let [label, value] of Object.entries(dataSet)) {
                 // If we dont already have an entry for audiofeature create one
-                if (!meanValues[label]) meanValues[label] = 0
+                if (!meanValues.hasOwnProperty(label)) meanValues[label] = 0
                 // Add value / number of datasets to entry
                 meanValues[label] += (value / this.props.audioFeaturesData.length)
             }
