@@ -15,7 +15,6 @@ class GenreChart extends Component {
                 }
             }
         }
-        console.log(genreTotals)
         return(genreTotals)
     }
 
@@ -29,14 +28,12 @@ class GenreChart extends Component {
         genreTotalsArray.sort((a, b) => {
             return (b.value - a.value)
         })
-        console.log(genreTotalsArray)
         return (genreTotalsArray.slice(0, 5))
     }
 
     render() {
         let genreTotalsData = this.calculateGenreTotals()
         let topFiveGenres = this.getTopFiveGenres(genreTotalsData)
-        console.log(topFiveGenres)
         let genreLabels = []
         let genreValues = []
         for(let genre of topFiveGenres) {

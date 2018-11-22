@@ -5,6 +5,7 @@ import GenreChart from './pie-chart';
 import AudioFeaturesChart from './radar-chart';
 import Album from "./albums";
 import "../App.css"
+import queryString from "query-string"
 
 let fakeServerData = {
   user: {
@@ -41,16 +42,33 @@ let fakeServerData = {
 class MainPage extends Component {
     constructor(){
       super()
-      this.state = {serverData: {}}
+      this.state = {
+      }
     }
   
     componentDidMount() {
-      this.setState({serverData: fakeServerData,
-      accessToken: this.props.accessToken
+      let parsed = queryString.parse(window.location.search)
+      let accessToken = parsed.access_token
+      
+      fetch("https://api.spotify.com/v1/me", {
+        headers: {"Authorization": "Bearer " + accessToken}
+      }).then((response) => {
+        return(response.json())
+      }).then((data) => {
+        return(
+          this.setState({
+            user: {
+              userName: data.display_name,
+              profileImage: data.images[0].url,
+              followers: data.followers.total
+            }
+          })
+        )
       })
     }
     
     render() {
+      console.log(this.state)
       return (
         <div className="App">
           <h3 style={{paddingTop: "15px"}}>Top Tracks Data</h3>
@@ -61,29 +79,30 @@ class MainPage extends Component {
             <div className="row">
               <div className="col" style={{paddingRight: "20px", paddingLeft: "20px"}}>
                 {/* Check for user before rendering UserInfo */}
-                {this.state.serverData.user &&
-                <UserInfo userDetails={this.state.serverData.user} />}
+                {this.state.user &&
+                <UserInfo userDetails={this.state.user} />}
               </div>
               <div className="col">
-                {this.state.serverData.topArtists &&
-                <GenreChart genreData={this.state.serverData.topArtists}/>}
+                {this.state.topArtists &&
+                <GenreChart genreData={this.state.topArtists}/>}
               </div>
               <div className="col">
-                {this.state.serverData.audioFeatures &&
-                <AudioFeaturesChart audioFeaturesData={this.state.serverData.audioFeatures}/>}
+                {this.state.audioFeatures &&
+                <AudioFeaturesChart audioFeaturesData={this.state.audioFeatures}/>}
               </div>
             </div>
           </div>
-          {this.state.serverData.topTracks ?
-          <div className="container" style={{paddingBottom: "10px"}}>
-            <h2>Top Tracks</h2>
-            <div className="row" style={{paddingTop: "10px"}}>
-              {/* Check for topTracks before rendering & create Album component for each track */}
-              {this.state.serverData.topTracks.map(track => {
-                return (<div className="col"><Album trackInfo={track}/></div>)
-              })}
+          {this.state.topTracks &&
+            <div className="container" style={{paddingBottom: "10px"}}>
+              <h2>Top Tracks</h2>
+              <div className="row" style={{paddingTop: "10px"}}>
+                {/* Check for topTracks before rendering & create Album component for each track */}
+                {this.state.topTracks.map((track) => {
+                  return (<div className="col"><Album trackInfo={track}/></div>)
+                })}
+              </div>
             </div>
-          </div> : <p>Error: Not logged in, Please login to see data</p>}
+          }
         </div>
       );
     }

@@ -7,7 +7,7 @@ class UserInfo extends Component {
       <img className="card-img-top" src={this.props.userDetails.profileImage} alt="Card cap" /> 
       <div className="card-body">
         <h5 className="card-title">{this.props.userDetails.userName}</h5>
-        <p className="card-text">UserInfo</p>
+        <p className="card-text">Followers: {this.props.userDetails.followers}</p>
       </div>
     </div>
     );

@@ -13,7 +13,6 @@ class AudioFeaturesChart extends Component {
                 meanValues[label] += (value / this.props.audioFeaturesData.length)
             }
         }
-        console.log(meanValues)
         return(meanValues)
     }
 
