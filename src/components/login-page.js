@@ -9,7 +9,9 @@ class LoginPage extends Component {
                 <hr className="my-4" />
                 <p>It uses the Spotify API to access account data such as your Top Tracks & Artists, You can login to Spotify here</p>
                 <p className="lead">
-                    <a className="btn btn-success btn-lg" href="http://localhost:8000/login">Login</a>
+                    {!this.props.accessToken ?
+                        <a className="btn btn-success btn-lg" href="http://localhost:8000/login">Login</a>
+                    : <p>Already Logged in</p>}
                 </p>
             </div>
         )

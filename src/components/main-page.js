@@ -5,7 +5,6 @@ import GenreChart from './pie-chart';
 import AudioFeaturesChart from './radar-chart';
 import Album from "./albums";
 import "../App.css"
-import queryString from "query-string"
 
 let fakeServerData = {
   user: {
@@ -38,71 +37,78 @@ let fakeServerData = {
   ]
 }
 
-
 class MainPage extends Component {
     constructor(){
       super()
       this.state = {
       }
     }
-  
-    componentDidMount() {
-      let parsed = queryString.parse(window.location.search)
-      let accessToken = parsed.access_token
-      
-      fetch("https://api.spotify.com/v1/me", {
-        headers: {"Authorization": "Bearer " + accessToken}
-      }).then((response) => {
-        return(response.json())
-      }).then((data) => {
-        return(
-          this.setState({
-            user: {
-              userName: data.display_name,
-              profileImage: data.images[0].url,
-              followers: data.followers.total
-            }
-          })
-        )
-      })
+
+    renderAlbums() {
+      let albumsToRender = this.props.topTracks
+      return(
+        <div className="container">
+          {/* Row 1 */}
+          <div className="row">
+            {albumsToRender.slice(0, 5).map((track) => {
+              return (<div className="col"><Album trackInfo={track}/></div>)
+            })}
+          </div>
+          {/* Row 2 */}
+          <div className="row">
+            {albumsToRender.slice(5, 10).map((track) => {
+              return (<div className="col"><Album trackInfo={track}/></div>)
+            })}
+          </div>
+          {/* Row 3 */}
+          <div className="row">
+            {albumsToRender.slice(10, 15).map((track) => {
+              return (<div className="col"><Album trackInfo={track}/></div>)
+            })}
+          </div>
+          {/* Row 4 */}
+          <div className="row">
+            {albumsToRender.slice(15, 20).map((track) => {
+              return (<div className="col"><Album trackInfo={track}/></div>)
+            })}
+          </div>
+        </div>
+      )
+    }
+
+    renderInfoAndGraphs() {
+      return(
+        <div className="container" style={{paddingBottom: "30px", paddingTop: "30px"}}>
+          <div className="row">
+            <div className="col" style={{paddingRight: "20px", paddingLeft: "20px"}}>
+              {/* Check for user before rendering UserInfo */}
+              {this.props.user &&
+              <UserInfo userDetails={this.props.user} />}
+            </div>
+            <div className="col">
+              {this.state.topArtists &&
+              <GenreChart genreData={this.state.topArtists}/>}
+            </div>
+            <div className="col">
+              {this.state.audioFeatures &&
+              <AudioFeaturesChart audioFeaturesData={this.state.audioFeatures}/>}
+            </div>
+          </div>
+        </div>
+      )
     }
     
     render() {
-      console.log(this.state)
       return (
         <div className="App">
-          <h3 style={{paddingTop: "15px"}}>Top Tracks Data</h3>
+          <h3 style={{paddingTop: "15px"}}>Main Stats</h3>
           <div className="container" style={{paddingTop: "5px"}}>
             <TimeFrameButtons />
           </div>
-          <div className="container" style={{paddingBottom: "30px", paddingTop: "30px"}}>
-            <div className="row">
-              <div className="col" style={{paddingRight: "20px", paddingLeft: "20px"}}>
-                {/* Check for user before rendering UserInfo */}
-                {this.state.user &&
-                <UserInfo userDetails={this.state.user} />}
-              </div>
-              <div className="col">
-                {this.state.topArtists &&
-                <GenreChart genreData={this.state.topArtists}/>}
-              </div>
-              <div className="col">
-                {this.state.audioFeatures &&
-                <AudioFeaturesChart audioFeaturesData={this.state.audioFeatures}/>}
-              </div>
-            </div>
-          </div>
-          {this.state.topTracks &&
-            <div className="container" style={{paddingBottom: "10px"}}>
-              <h2>Top Tracks</h2>
-              <div className="row" style={{paddingTop: "10px"}}>
-                {/* Check for topTracks before rendering & create Album component for each track */}
-                {this.state.topTracks.map((track) => {
-                  return (<div className="col"><Album trackInfo={track}/></div>)
-                })}
-              </div>
-            </div>
-          }
+          {this.renderInfoAndGraphs()}
+          <h3>Your Top 20 Tracks</h3>
+          {this.props.topTracks && 
+            <div>{this.renderAlbums()}</div>}
         </div>
       );
     }
