@@ -19,12 +19,15 @@ class AudioFeaturesChart extends Component {
     render() {
         // Get mean values & setup data arrays
         let meanAudioFeatureValues = this.calculateMeanValues()
+        console.log(meanAudioFeatureValues)
         let audioFeatureLabels = []
         let audioFeatureValues = []
         // Mangle data into arrays
         for (let [label, value] of Object.entries(meanAudioFeatureValues)) {
+            let rounded = (value*10).toFixed(2)
+            console.log(rounded)
             audioFeatureLabels.push(label)
-            audioFeatureValues.push(value)
+            audioFeatureValues.push(rounded)
         }
         const options = {
             scale: {

@@ -80,18 +80,18 @@ class MainPage extends Component {
       return(
         <div className="container" style={{paddingBottom: "30px", paddingTop: "30px"}}>
           <div className="row">
-            <div className="col" style={{paddingRight: "20px", paddingLeft: "20px"}}>
+            <div className="col">
               {/* Check for user before rendering UserInfo */}
               {this.props.user &&
               <UserInfo userDetails={this.props.user} />}
             </div>
             <div className="col">
-              {this.state.topArtists &&
-              <GenreChart genreData={this.state.topArtists}/>}
+              {this.props.topArtists &&
+              <GenreChart genreData={this.props.topArtists}/>}
             </div>
             <div className="col">
-              {this.state.audioFeatures &&
-              <AudioFeaturesChart audioFeaturesData={this.state.audioFeatures}/>}
+              {this.props.audioFeatures &&
+              <AudioFeaturesChart audioFeaturesData={this.props.audioFeatures}/>}
             </div>
           </div>
         </div>
@@ -99,6 +99,7 @@ class MainPage extends Component {
     }
     
     render() {
+      console.log(this.props.topArtists)
       return (
         <div className="App">
           <h3 style={{paddingTop: "15px"}}>Main Stats</h3>
@@ -107,9 +108,10 @@ class MainPage extends Component {
           </div>
           {this.renderInfoAndGraphs()}
           <h3>Your Top 20 Tracks</h3>
-          {this.props.topTracks && 
-            <div>{this.renderAlbums()}</div>}
-        </div>
+          {this.props.topTracks ? 
+            <div>{this.renderAlbums()}</div> : 
+            <p>Error: Can't get server data, you may not be logged in or access token has expired. Try logging in again.</p>}
+          </div>
       );
     }
   }
