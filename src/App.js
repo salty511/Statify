@@ -17,7 +17,15 @@ class App extends Component {
   componentDidMount() {
     let parsed = queryString.parse(window.location.search)
     let accessToken = parsed.access_token
+    this.setState({accessToken: accessToken})
+    this.getServerData(accessToken, "medium_term")
+    this.getServerData(accessToken, "short_term")
+    this.getServerData(accessToken, "long_term")
 
+  }
+
+  getServerData(accessToken, timeRange) {
+    let serverData = {}
     if(accessToken) {
       //Get UserInfo data
       if(!this.state.user) {
@@ -28,26 +36,24 @@ class App extends Component {
           return(response.json())
         }).then((data) => {
           console.log("User call complete")
-          this.setState({
-            user: {
-              userName: data.display_name,
-              profileImage: data.images[0] ? data.images[0].url : "https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image",
-              followers: data.followers.total
-            }
-          })
+          serverData.user = {
+            userName: data.display_name,
+            profileImage: data.images[0] ? data.images[0].url : "https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image",
+            followers: data.followers.total
+          }
         })
       }
 
       //Get TopTracks data
       if(!this.state.topTracks) {
         console.log("Making topTracks api call")
-        fetch("https://api.spotify.com/v1/me/top/tracks", {
+        fetch("https://api.spotify.com/v1/me/top/tracks/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
         }).then((data) => {
           console.log("topTracks call complete")
-          this.setState({topTracks: data.items.map((trackObject) => {
+          serverData.topTracks = data.items.map((trackObject) => {
             return({
               albumName: trackObject.album.name, 
               trackName: trackObject.name, 
@@ -55,13 +61,13 @@ class App extends Component {
               image: trackObject.album.images[1].url,
               trackId: trackObject.id
             })
-          })})
+          })
         }).then(() => { // Get audioFeatures data
           console.log("Making audio features call")
           return(
             fetch("https://api.spotify.com/v1/audio-features/?ids=" +
               //track id query params
-              this.state.topTracks.map((trackObject) => {
+              serverData.topTracks.map((trackObject) => {
                 return(trackObject.trackId)
               }).join(), {
                 headers: {"Authorization": "Bearer " + accessToken}
@@ -70,15 +76,14 @@ class App extends Component {
               console.log("Audio features call complete")
               return(response.json()) 
             }).then((data) => { //console log json data when json() promise resolves
-              console.log(data)
-              this.setState({audioFeatures: data.audio_features.map((audioFeatureObject) => {
+              serverData.audioFeatures = data.audio_features.map((audioFeatureObject) => {
                 return({
                   danceability: audioFeatureObject.danceability,
                   energy: audioFeatureObject.energy,
                   speechiness: audioFeatureObject.speechiness,
                   instrumentalness: audioFeatureObject.instrumentalness
                 })
-              })})
+              })
             })
           )
         })
@@ -86,26 +91,26 @@ class App extends Component {
 
       // Get topArtists data
       if(!this.state.topArists) {
-        console.log("Making topArtists call")
-        fetch("https://api.spotify.com/v1/me/top/artists", {
+        console.log("Making topArtists call") 
+        fetch("https://api.spotify.com/v1/me/top/artists/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           console.log("topArtists call complete")
           return(response.json())
         }).then((data) => {
-          this.setState({topArtists: (data.items.map((artistObject) => {
+          serverData.topArtists = data.items.map((artistObject) => {
             return({
               artistName: artistObject.name,
               genres: artistObject.genres
             })
-          }))})
+          })
         })
       }
     }
+    setTimeout(() => {this.setState({[timeRange]: serverData})}, 1000)
   }
 
   render() { 
-    console.log(this.state)
     return (
       <Router>
         <div className="App">
@@ -113,10 +118,10 @@ class App extends Component {
           <Route exact path="/main" render={(props) => {
             return(
               <MainPage {...props} 
-              user={this.state.user && this.state.user}
-              topTracks={this.state.topTracks && this.state.topTracks}
-              audioFeatures={this.state.audioFeatures}
-              topArtists={this.state.topArtists} />
+              mediumTerm={this.state.medium_term}
+              shortTerm={this.state.short_term}
+              longTerm={this.state.long_term}
+              accessToken={this.state.accessToken} />
             )
           }}/>
           <Route exact path="/" render={(props) => {

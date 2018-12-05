@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Pie } from 'react-chartjs-2';
+import stringSimilarity from 'string-similarity'
 
 class GenreChart extends Component {
     calculateGenreTotals() {
@@ -31,7 +32,27 @@ class GenreChart extends Component {
         return (genreTotalsArray.slice(0, 5))
     }
 
+    filterGenres(topGenresArray) {
+        console.log("running")
+        let filteredGenres = []
+        for(let y=0; y<topGenresArray.length; y++) {
+            for(let x=0; x<topGenresArray.length; x++) {
+                if(!(x === y)) {
+                    let similarityValue = stringSimilarity.compareTwoStrings(topGenresArray[y].name, topGenresArray[x].name)
+                    if(similarityValue < 0.5) {
+                        let genreToPush = topGenresArray[y].name.length < topGenresArray[x].name.length ? 
+                        topGenresArray[y] : 
+                        topGenresArray[x]
+                        filteredGenres.push({name: genreToPush.name, value: genreToPush.value})
+                    }
+                }
+            }
+        }
+        return filteredGenres
+    }
+
     render() {
+        console.log("Genre Chart rendering")
         let genreTotalsData = this.calculateGenreTotals()
         let topFiveGenres = this.getTopFiveGenres(genreTotalsData)
         let genreLabels = []

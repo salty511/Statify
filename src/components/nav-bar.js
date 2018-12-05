@@ -6,22 +6,22 @@ class NavBar extends Component {
         return(
             <div className="navbar navbar-expand navbar-dark bg-dark">
                 <div className="container">
-                    <a className="navbar-brand" href="#">Statify</a>
+                    <span className="navbar-brand">Statify</span>
                     <div className="collapse navbar-collapse" id="navbarColor02">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
                                 <Link to="/">
-                                    <span className="nav-link" href="#">Login</span>
+                                    <span className="nav-link">Login</span>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/main">
-                                    <span className="nav-link" href="#">Main</span>
+                                    <span className="nav-link">Main</span>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/about">
-                                    <span className="nav-link" href="#">About</span>
+                                    <span className="nav-link">About</span>
                                 </Link>
                             </li>
                         </ul>

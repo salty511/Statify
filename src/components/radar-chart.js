@@ -19,13 +19,11 @@ class AudioFeaturesChart extends Component {
     render() {
         // Get mean values & setup data arrays
         let meanAudioFeatureValues = this.calculateMeanValues()
-        console.log(meanAudioFeatureValues)
         let audioFeatureLabels = []
         let audioFeatureValues = []
         // Mangle data into arrays
         for (let [label, value] of Object.entries(meanAudioFeatureValues)) {
             let rounded = (value*10).toFixed(2)
-            console.log(rounded)
             audioFeatureLabels.push(label)
             audioFeatureValues.push(rounded)
         }
@@ -44,7 +42,7 @@ class AudioFeaturesChart extends Component {
             labels: audioFeatureLabels,
             datasets: [
               {
-                label: 'Mean Value from your music',
+                label: 'Average Audio Feature Values',
                 backgroundColor: 'rgba(33, 33, 33, 0.3)',
                 borderColor: 'rgb(35, 73, 178)',
                 pointBackgroundColor: 'rgba(179,181,198,1)',
