@@ -74,13 +74,15 @@ class MainPage extends Component {
               <button className="btn btn-outline-info" onClick={() => this.onClickHandler("longTerm")} style={{margin: "10px"}}>Long Term</button>
             </div>
           </div>
-          {!this.props.accessToken && <p>Error: can't get server data, you may not be logged in or auth token has expired, try loggin in again</p>}
-          {dataSetToRender ?
+          {!this.props.accessToken ? <p>Error: can't get server data, you may not be logged in or auth token has expired, try loggin in again</p> :
             <div>
-              {this.renderInfoAndGraphs(dataSetToRender)}
-              <h3>Your Top 20 Tracks</h3>
-              <div>{this.renderAlbums(dataSetToRender)}</div>
-            </div> : <p>Loading</p>}
+              {dataSetToRender ?
+                <div>
+                  {this.renderInfoAndGraphs(dataSetToRender)}
+                  <h3>Your Top 20 Tracks</h3>
+                  <div>{this.renderAlbums(dataSetToRender)}</div>
+                </div> : <p>Loading</p>}
+            </div>}
         </div>
       );
     }

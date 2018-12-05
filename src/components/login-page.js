@@ -10,7 +10,7 @@ class LoginPage extends Component {
                 <p>It uses the Spotify API to access account data such as your Top Tracks & Artists, You can login to Spotify here</p>
                 <p className="lead">
                     {!this.props.accessToken ?
-                        <a className="btn btn-success btn-lg" href="http://localhost:8000/login">Login</a>
+                        <a className="btn btn-success btn-lg" href="https://statify-salt-auth.herokuapp.com/login">Login</a>
                     : <p>Already Logged in</p>}
                 </p>
             </div>

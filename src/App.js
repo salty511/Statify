@@ -106,8 +106,8 @@ class App extends Component {
           })
         })
       }
+      setTimeout(() => {this.setState({[timeRange]: serverData})}, 1000)
     }
-    setTimeout(() => {this.setState({[timeRange]: serverData})}, 1000)
   }
 
   render() { 
