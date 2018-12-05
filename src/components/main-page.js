@@ -20,12 +20,12 @@ class MainPage extends Component {
         <div className="container">
           <div className="row">
             {albumsToRender.slice(0, 12).map((track) => {
-              return (<div className="col-3"><Album trackInfo={track}/></div>)
+              return (<div className="col-3 sm-2"><Album trackInfo={track}/></div>)
             })}
           </div>
           <div className="row">
             {albumsToRender.slice(12, 20).map((track) => {
-              return (<div className="col-3"><Album trackInfo={track}/></div>)
+              return (<div className="col-3 sm-2"><Album trackInfo={track}/></div>)
             })}
           </div>
         </div>
