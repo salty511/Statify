@@ -53,7 +53,8 @@ class MainPage extends Component {
     setCurrentDataSet() {
       switch(this.state.currentDataSet) {
         case "mediumTerm": 
-          return(this.props.mediumTerm)
+          console.log(this.props.mediumTerm)
+          return(this.props.mediumTerm ? this.props.mediumTerm : null)
         case "shortTerm": 
           return(this.props.shortTerm)
         case "longTerm": 

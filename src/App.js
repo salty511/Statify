@@ -21,16 +21,18 @@ class App extends Component {
     this.getServerData(accessToken, "medium_term")
     this.getServerData(accessToken, "short_term")
     this.getServerData(accessToken, "long_term")
-
   }
 
   getServerData(accessToken, timeRange) {
     let serverData = {}
+    let topArtistsCall
+    let topTracksAndAudioFeaturesCall
+    let userCall
     if(accessToken) {
       //Get UserInfo data
       if(!this.state.user) {
         console.log("Making user api call")
-        fetch("https://api.spotify.com/v1/me", {
+        userCall = fetch("https://api.spotify.com/v1/me", {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
@@ -47,7 +49,7 @@ class App extends Component {
       //Get TopTracks data
       if(!this.state.topTracks) {
         console.log("Making topTracks api call")
-        fetch("https://api.spotify.com/v1/me/top/tracks/?time_range=" + timeRange, {
+        topTracksAndAudioFeaturesCall = fetch("https://api.spotify.com/v1/me/top/tracks/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
@@ -92,7 +94,7 @@ class App extends Component {
       // Get topArtists data
       if(!this.state.topArists) {
         console.log("Making topArtists call") 
-        fetch("https://api.spotify.com/v1/me/top/artists/?time_range=" + timeRange, {
+        topArtistsCall = fetch("https://api.spotify.com/v1/me/top/artists/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           console.log("topArtists call complete")
@@ -106,7 +108,9 @@ class App extends Component {
           })
         })
       }
-      setTimeout(() => {this.setState({[timeRange]: serverData})}, 1000)
+      Promise.all([topArtistsCall, topTracksAndAudioFeaturesCall, userCall]).then(() => {
+        this.setState({[timeRange]: serverData})
+      })
     }
   }
 
