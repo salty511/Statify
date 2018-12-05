@@ -20,12 +20,12 @@ class MainPage extends Component {
         <div className="container">
           <div className="row">
             {albumsToRender.slice(0, 12).map((track) => {
-              return (<div className="col-3 sm-2"><Album trackInfo={track}/></div>)
+              return (<div className="col-lg-3 col-md-3 col-sm-6"><Album trackInfo={track}/></div>)
             })}
           </div>
           <div className="row">
             {albumsToRender.slice(12, 20).map((track) => {
-              return (<div className="col-3 sm-2"><Album trackInfo={track}/></div>)
+              return (<div className="col-lg-3 col-md-3 col-sm-6"><Album trackInfo={track}/></div>)
             })}
           </div>
         </div>
@@ -85,7 +85,7 @@ class MainPage extends Component {
                 <div>
                   {this.renderInfoAndGraphs(dataSetToRender)}
                   <h3>Your Top 20 Tracks</h3>
-                  <div>{this.renderAlbums(dataSetToRender)}</div>
+                  <div style={{paddingTop: "15px"}}>{this.renderAlbums(dataSetToRender)}</div>
                 </div> : <p>Loading</p>}
             </div>}
         </div>
