@@ -53,7 +53,6 @@ class MainPage extends Component {
     setCurrentDataSet() {
       switch(this.state.currentDataSet) {
         case "mediumTerm": 
-          console.log(this.props.mediumTerm)
           return(this.props.mediumTerm ? this.props.mediumTerm : null)
         case "shortTerm": 
           return(this.props.shortTerm)
@@ -68,7 +67,6 @@ class MainPage extends Component {
     }
     
     render() {
-      console.log(this.state)
       let dataSetToRender = this.setCurrentDataSet()
       return (
         <div className="App">

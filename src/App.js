@@ -21,6 +21,7 @@ class App extends Component {
     this.getServerData(accessToken, "medium_term")
     this.getServerData(accessToken, "short_term")
     this.getServerData(accessToken, "long_term")
+    
   }
 
   getServerData(accessToken, timeRange) {
@@ -61,7 +62,8 @@ class App extends Component {
               trackName: trackObject.name, 
               artistName: trackObject.artists[0].name, 
               image: trackObject.album.images[1].url,
-              trackId: trackObject.id
+              trackId: trackObject.id,
+              previewURL: trackObject.preview_url
             })
           })
         }).then(() => { // Get audioFeatures data
@@ -111,7 +113,12 @@ class App extends Component {
       Promise.all([topArtistsCall, topTracksAndAudioFeaturesCall, userCall]).then(() => {
         this.setState({[timeRange]: serverData})
       })
+
     }
+  }
+
+  getPreviews(accessToken) {
+    
   }
 
   render() { 
