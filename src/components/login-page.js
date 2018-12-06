@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 class LoginPage extends Component {
     render(){
-        let loginURL = process.env.REACT_APP_loginURL ? process.env.REACT_APP_loginURL : "https://statify-salt-auth.herokuapp.com/"
+        let loginURL = process.env.REACT_APP_loginURL ? process.env.REACT_APP_loginURL : "https://statify-salt-auth.herokuapp.com/login"
         console.log(process.env.REACT_APP_loginURL)
         return(
             <div className="container" style={{paddingTop: "30px", textAlign: "left"}}>
