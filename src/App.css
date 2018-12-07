@@ -2,3 +2,31 @@
   text-align: center;
 }
 
+.card-img-top {
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.preview-button {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.btn-success {
+  padding: 8px 16px;
+}
+
+.img-preview-button:hover .card-img-top {
+  opacity: 0.3;
+}
+
+.img-preview-button:hover .preview-button {
+  opacity: 1;
+}

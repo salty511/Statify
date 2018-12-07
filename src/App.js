@@ -56,6 +56,7 @@ class App extends Component {
           return(response.json())
         }).then((data) => {
           console.log("topTracks call complete")
+          console.log(data)
           serverData.topTracks = data.items.map((trackObject) => {
             return({
               albumName: trackObject.album.name, 

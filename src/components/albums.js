@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import Sound from "react-sound"
+import "../App.css"
 
 class Album extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {playStatus: Sound.status.STOPPED}
         this.onClickHandler = this.onClickHandler.bind(this)
     }
 
     onClickHandler() {
-        console.log("hello")
-        this.setState({playStatus: Sound.status.PLAYING})
-    }
+        switch(this.state.playStatus) {
+            case Sound.status.STOPPED: 
+                this.setState({playStatus: Sound.status.PLAYING})
+                break
+            case Sound.status.PLAYING:
+                this.setState({playStatus: Sound.status.STOPPED})
+                break
+        }
+    }   
 
     render(){
         console.log("album render")
@@ -19,14 +26,19 @@ class Album extends Component {
         return (
             <div style={{paddingBottom: "10px"}}>
                 <Sound 
-                url={this.props.trackInfo.previewURL} 
-                playStatus={this.state.playStatus} />
+                    url={this.props.trackInfo.previewURL} 
+                    playStatus={this.state.playStatus} 
+                />
                 <div className="card">
-                    <img className="card-img-top" src={this.props.trackInfo.image} alt="Card cap" /> 
+                    <div className="img-preview-button">
+                        <img className="card-img-top" src={this.props.trackInfo.image} alt="Card cap"/> 
+                        <div class="preview-button">
+                            <span className="btn-success" onClick={this.onClickHandler}>Play/Pause</span>
+                        </div>
+                    </div>
                     <div className="card-body">
                         <h5 className="card-title">{this.props.trackInfo.albumName}</h5>
                         <h6 className="card-subtitle">{this.props.trackInfo.artistName} - {this.props.trackInfo.trackName}</h6>
-                        <button onClick={this.onClickHandler}>Preview</button>
                     </div>
                 </div>
             </div>
