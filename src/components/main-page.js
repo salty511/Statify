@@ -4,14 +4,18 @@ import GenreChart from './pie-chart';
 import AudioFeaturesChart from './radar-chart';
 import Album from "./albums";
 import "../App.css"
+import Sound from "react-sound"
 
 class MainPage extends Component {
     constructor(){
       super()
       this.state = {
-        currentDataSet: "mediumTerm"
+        currentDataSet: "mediumTerm",
+        playStatus: Sound.status.STOPPED,
+        previewURL: null
       }
       this.onClickHandler = this.onClickHandler.bind(this)
+      this.onClickHandler_Album = this.onClickHandler_Album.bind(this)
     }
 
     renderAlbums(dataSet) {
@@ -19,13 +23,8 @@ class MainPage extends Component {
       return(
         <div className="container">
           <div className="row">
-            {albumsToRender.slice(0, 12).map((track) => {
-              return (<div className="col-lg-3 col-md-3 col-sm-6"><Album trackInfo={track}/></div>)
-            })}
-          </div>
-          <div className="row">
-            {albumsToRender.slice(12, 20).map((track) => {
-              return (<div className="col-lg-3 col-md-3 col-sm-6"><Album trackInfo={track}/></div>)
+            {albumsToRender.map((track) => {
+              return (<div className="col-lg-3 col-md-3 col-sm-6 col-6"><Album trackInfo={track} onClickHandler={this.onClickHandler_Album}/></div>)
             })}
           </div>
         </div>
@@ -65,11 +64,28 @@ class MainPage extends Component {
     onClickHandler(timeFrame) {
       this.setState({currentDataSet: timeFrame})
     }
+
+    onClickHandler_Album(soundURL) {
+      switch(this.state.playStatus) {
+        case Sound.status.STOPPED: 
+            this.setState({playStatus: Sound.status.PLAYING})
+            break
+        case Sound.status.PLAYING:
+            this.setState({playStatus: Sound.status.STOPPED})
+            break
+      }
+      this.setState({soundURL: soundURL})
+    }
     
     render() {
       let dataSetToRender = this.setCurrentDataSet()
       return (
         <div className="App">
+          <Sound 
+            url={this.state.soundURL} 
+            playStatus={this.state.playStatus} 
+            volume={50}
+          />
           <h3 style={{paddingTop: "15px"}}>Main Stats</h3>
           <div className="container" style={{paddingTop: "5px"}}>
             <div>

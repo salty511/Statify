@@ -19,10 +19,6 @@
   text-align: center;
 }
 
-.btn-success {
-  padding: 8px 16px;
-}
-
 .img-preview-button:hover .card-img-top {
   opacity: 0.3;
 }

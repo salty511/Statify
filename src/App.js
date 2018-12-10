@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import NavBar from "./components/nav-bar"
 import LoginPage from "./components/login-page";
 import queryString from "query-string"
+import AboutPage from "./components/about-page"
 
 defaults.global.legend.labels.fontColor = "#EBEBEB";
 
@@ -142,6 +143,7 @@ class App extends Component {
               accessToken={this.state.accessToken && this.state.accessToken} />
             )
           }}/>
+          <Route exact path="/about" component={AboutPage} />
         </div>
       </Router>
     );
