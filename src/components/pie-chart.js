@@ -52,7 +52,6 @@ class GenreChart extends Component {
     }
 
     render() {
-        console.log("Genre Chart rendering")
         let genreTotalsData = this.calculateGenreTotals()
         let topFiveGenres = this.getTopFiveGenres(genreTotalsData)
         let genreLabels = []

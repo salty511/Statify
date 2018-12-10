@@ -33,13 +33,13 @@ class App extends Component {
     if(accessToken) {
       //Get UserInfo data
       if(!this.state.user) {
-        console.log("Making user api call")
+        console.log(timeRange + ": Making user api call")
         userCall = fetch("https://api.spotify.com/v1/me", {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
         }).then((data) => {
-          console.log("User call complete")
+          console.log(timeRange + ": User call complete")
           serverData.user = {
             userName: data.display_name,
             profileImage: data.images[0] ? data.images[0].url : "https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image",
@@ -50,14 +50,13 @@ class App extends Component {
 
       //Get TopTracks data
       if(!this.state.topTracks) {
-        console.log("Making topTracks api call")
+        console.log(timeRange + ": Making topTracks api call")
         topTracksAndAudioFeaturesCall = fetch("https://api.spotify.com/v1/me/top/tracks/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
         }).then((data) => {
-          console.log("topTracks call complete")
-          console.log(data)
+          console.log(timeRange + ": topTracks call complete")
           serverData.topTracks = data.items.map((trackObject) => {
             return({
               albumName: trackObject.album.name, 
@@ -69,7 +68,7 @@ class App extends Component {
             })
           })
         }).then(() => { // Get audioFeatures data
-          console.log("Making audio features call")
+          console.log(timeRange + ": Making audio features call")
           return(
             fetch("https://api.spotify.com/v1/audio-features/?ids=" +
               //track id query params
@@ -79,7 +78,7 @@ class App extends Component {
                 headers: {"Authorization": "Bearer " + accessToken}
               } //headers in the api call (auth token)
             ).then((response) => { //function ran when fetch() promise resolves
-              console.log("Audio features call complete")
+              console.log(timeRange + ": Audio features call complete")
               return(response.json()) 
             }).then((data) => { //console log json data when json() promise resolves
               serverData.audioFeatures = data.audio_features.map((audioFeatureObject) => {
@@ -97,11 +96,11 @@ class App extends Component {
 
       // Get topArtists data
       if(!this.state.topArists) {
-        console.log("Making topArtists call") 
+        console.log(timeRange + ": Making topArtists call") 
         topArtistsCall = fetch("https://api.spotify.com/v1/me/top/artists/?time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
-          console.log("topArtists call complete")
+          console.log(timeRange + ": topArtists call complete")
           return(response.json())
         }).then((data) => {
           serverData.topArtists = data.items.map((artistObject) => {

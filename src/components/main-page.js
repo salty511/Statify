@@ -66,15 +66,18 @@ class MainPage extends Component {
     }
 
     onClickHandler_Album(soundURL) {
-      switch(this.state.playStatus) {
-        case Sound.status.STOPPED: 
-            this.setState({playStatus: Sound.status.PLAYING})
-            break
-        case Sound.status.PLAYING:
-            this.setState({playStatus: Sound.status.STOPPED})
-            break
+      if (!(soundURL === this.state.previewURL)) {
+        this.setState({playStatus: Sound.status.PLAYING})
       }
-      this.setState({soundURL: soundURL})
+      else {
+        if(this.state.playStatus === Sound.status.PLAYING) {
+          this.setState({playStatus: Sound.status.STOPPED})
+        }
+        else {
+          this.setState({playStatus: Sound.status.PLAYING})
+        }
+      }
+      this.setState({previewURL: soundURL})
     }
     
     render() {
@@ -82,7 +85,7 @@ class MainPage extends Component {
       return (
         <div className="App">
           <Sound 
-            url={this.state.soundURL} 
+            url={this.state.previewURL} 
             playStatus={this.state.playStatus} 
             volume={50}
           />
