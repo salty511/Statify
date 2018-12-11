@@ -6,6 +6,7 @@ import NavBar from "./components/nav-bar"
 import LoginPage from "./components/login-page";
 import queryString from "query-string"
 import AboutPage from "./components/about-page"
+import RecommendationsPage from "./components/recommendations-page"
 
 defaults.global.legend.labels.fontColor = "#EBEBEB";
 
@@ -22,7 +23,6 @@ class App extends Component {
     this.getServerData(accessToken, "medium_term")
     this.getServerData(accessToken, "short_term")
     this.getServerData(accessToken, "long_term")
-    
   }
 
   getServerData(accessToken, timeRange) {
@@ -51,7 +51,7 @@ class App extends Component {
       //Get TopTracks data
       if(!this.state.topTracks) {
         console.log(timeRange + ": Making topTracks api call")
-        topTracksAndAudioFeaturesCall = fetch("https://api.spotify.com/v1/me/top/tracks/?time_range=" + timeRange, {
+        topTracksAndAudioFeaturesCall = fetch("https://api.spotify.com/v1/me/top/tracks/?limit=50&time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           return(response.json())
@@ -97,7 +97,7 @@ class App extends Component {
       // Get topArtists data
       if(!this.state.topArists) {
         console.log(timeRange + ": Making topArtists call") 
-        topArtistsCall = fetch("https://api.spotify.com/v1/me/top/artists/?time_range=" + timeRange, {
+        topArtistsCall = fetch("https://api.spotify.com/v1/me/top/artists/?limit=50&time_range=" + timeRange, {
           headers: {"Authorization": "Bearer " + accessToken}
         }).then((response) => {
           console.log(timeRange + ": topArtists call complete")
@@ -143,6 +143,7 @@ class App extends Component {
             )
           }}/>
           <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/recommendations" component={RecommendationsPage} />
         </div>
       </Router>
     );

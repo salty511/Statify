@@ -20,6 +20,11 @@ class NavBar extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
+                                <Link to="/recommendations" >
+                                    <span className="nav-link">Recommendations</span>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link to="/about">
                                     <span className="nav-link">About</span>
                                 </Link>

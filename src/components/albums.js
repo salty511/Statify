@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css"
+import "./albums-style.css"
 
 class Album extends Component {
     render(){

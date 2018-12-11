@@ -23,8 +23,8 @@ class MainPage extends Component {
       return(
         <div className="container">
           <div className="row">
-            {albumsToRender.map((track) => {
-              return (<div className="col-lg-3 col-md-3 col-sm-6 col-6"><Album trackInfo={track} onClickHandler={this.onClickHandler_Album}/></div>)
+            {albumsToRender.slice(0, 20).map((track) => {
+              return (<div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><Album trackInfo={track} onClickHandler={this.onClickHandler_Album}/></div>)
             })}
           </div>
         </div>
@@ -33,12 +33,12 @@ class MainPage extends Component {
 
     renderInfoAndGraphs(dataSet) {
       return(
-        <div className="container" style={{paddingBottom: "30px", paddingTop: "30px"}}>
+        <div className="container" style={{paddingBottom: "20px", paddingTop: "20px"}}>
           <div className="row">
-            <div className="col">
+            <div className="col" style={{paddingBottom: "10px"}}>
               <UserInfo userDetails={dataSet.user} />
             </div>
-            <div className="col">
+            <div className="col" style={{paddingBottom: "10px"}}>
               <GenreChart genreData={dataSet.topArtists}/>
             </div>
             <div className="col">
@@ -87,6 +87,7 @@ class MainPage extends Component {
           <Sound 
             url={this.state.previewURL} 
             playStatus={this.state.playStatus} 
+            onFinishedPlaying={() => this.setState({playStatus: Sound.status.STOPPED})}
             volume={50}
           />
           <h3 style={{paddingTop: "15px"}}>Main Stats</h3>
