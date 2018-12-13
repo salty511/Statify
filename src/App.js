@@ -6,7 +6,6 @@ import NavBar from "./components/nav-bar"
 import LoginPage from "./components/login-page";
 import queryString from "query-string"
 import AboutPage from "./components/about-page"
-import RecommendationsPage from "./components/recommendations-page"
 
 defaults.global.legend.labels.fontColor = "#EBEBEB";
 
@@ -143,7 +142,6 @@ class App extends Component {
             )
           }}/>
           <Route exact path="/about" component={AboutPage} />
-          <Route exact path="/recommendations" component={RecommendationsPage} />
         </div>
       </Router>
     );

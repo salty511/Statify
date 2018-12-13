@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MindMap from "react-mindmap"
 
 const nodes = [
     {
@@ -28,7 +27,6 @@ class RecommendationsPage extends Component {
         return(
             <div className="container" style={{paddingTop: "20px"}}>
                 <h1>Recommendations</h1>
-                <MindMap nodes={nodes} connections={connections}/>
             </div>
         )
     }
