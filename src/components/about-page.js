@@ -14,7 +14,8 @@ class AboutPage extends Component {
                     your top artists. An audio features chart showing the average values of each audio feature across your top tracks. 
                 </p>
                 <p>
-                    It also displays your top 20 tracks with a 30 second preview feature on hovering over the album cover.
+                    It also displays your top 20 tracks with a 30 second preview feature on hovering over the album cover
+                    (On mobile just tap the album cover for button to appear).
                     You can click the time frame buttons at the top of the page to switch
                     between short term (approximately last 4 weeks), medium term (approximately last 6 months), and long term 
                     (calculated from several years of data and including all new data as it becomes available)
