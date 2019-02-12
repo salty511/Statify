@@ -8,7 +8,7 @@ class Album extends Component {
                 <div className="card">
                     <div className="img-preview-button">
                         <img className="card-img-top" src={this.props.trackInfo.image} alt="Card cap"/> 
-                        <div class="preview-button">
+                        <div className="preview-button">
                             <span className="btn-success" style={{padding: "10px"}} 
                             onClick={() => {this.props.onClickHandler(this.props.trackInfo.previewURL)}}>Preview</span>
                         </div>

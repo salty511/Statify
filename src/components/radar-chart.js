@@ -6,7 +6,12 @@ class AudioFeaturesChart extends Component {
         let meanValues = {}
         // Loop over each dataset in array, then over each property in dataset
         for(let dataSet of this.props.audioFeaturesData) {
+            let x=0
             for(let [label, value] of Object.entries(dataSet)) {
+                x = x+1
+                if(x==6) {
+                    break
+                }
                 // If we dont already have an entry for audiofeature create one
                 if (!meanValues.hasOwnProperty(label)) meanValues[label] = 0
                 // Add value / number of datasets to entry

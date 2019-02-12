@@ -6,6 +6,7 @@ import NavBar from "./components/nav-bar"
 import LoginPage from "./components/login-page";
 import queryString from "query-string"
 import AboutPage from "./components/about-page"
+import AudioFeaturesPage from "./components/audio-features-page"
 
 defaults.global.legend.labels.fontColor = "#EBEBEB";
 
@@ -79,13 +80,19 @@ class App extends Component {
             ).then((response) => { //function ran when fetch() promise resolves
               console.log(timeRange + ": Audio features call complete")
               return(response.json()) 
-            }).then((data) => { //console log json data when json() promise resolves
+            }).then((data) => {
+              console.log(data)
               serverData.audioFeatures = data.audio_features.map((audioFeatureObject) => {
                 return({
                   danceability: audioFeatureObject.danceability,
                   energy: audioFeatureObject.energy,
                   speechiness: audioFeatureObject.speechiness,
-                  instrumentalness: audioFeatureObject.instrumentalness
+                  instrumentalness: audioFeatureObject.instrumentalness,
+                  acousticness: audioFeatureObject.acousticness,
+                  key: audioFeatureObject.key,
+                  loudness: audioFeatureObject.loudness,
+                  valence: audioFeatureObject.valence,
+                  tempo: audioFeatureObject.tempo
                 })
               })
             })
@@ -134,13 +141,21 @@ class App extends Component {
               longTerm={this.state.long_term}
               accessToken={this.state.accessToken} />
             )
-          }}/>
+          }} />
           <Route exact path="/" render={(props) => {
             return(
               <LoginPage {...props}
               accessToken={this.state.accessToken && this.state.accessToken} />
             )
-          }}/>
+          }} />
+          <Route exact path="/audiofeatures" render={(props) => {
+            return(
+              <AudioFeaturesPage {...props}
+              mediumTerm={this.state.medium_term}
+              shortTerm={this.state.short_term}
+              longTerm={this.state.long_term} />
+            )
+          }} />
           <Route exact path="/about" component={AboutPage} />
         </div>
       </Router>

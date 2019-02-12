@@ -90,7 +90,7 @@ class MainPage extends Component {
             onFinishedPlaying={() => this.setState({playStatus: Sound.status.STOPPED})}
             volume={50}
           />
-          <h3 style={{paddingTop: "15px"}}>Main Stats</h3>
+          <h3 style={{paddingTop: "20px"}}>Main Stats</h3>
           <div className="container" style={{paddingTop: "5px"}}>
             <div>
               <button className="btn btn-outline-info" onClick={() => this.onClickHandler("shortTerm")} style={{margin: "10px"}}>Short Term</button>
