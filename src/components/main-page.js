@@ -98,7 +98,7 @@ class MainPage extends Component {
               <button className="btn btn-outline-info" onClick={() => this.onClickHandler("longTerm")} style={{margin: "10px"}}>Long Term</button>
             </div>
           </div>
-          {!this.props.accessToken ? <p>Error: can't get server data, you may not be logged in or auth token has expired, try loggin in again</p> :
+          {!this.props.accessToken ? <p className="text-warning">Error: can't get server data, you may not be logged in or auth token has expired, try loggin in again</p> :
             <div>
               {dataSetToRender ?
                 <div>

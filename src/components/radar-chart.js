@@ -9,7 +9,7 @@ class AudioFeaturesChart extends Component {
             let x=0
             for(let [label, value] of Object.entries(dataSet)) {
                 x = x+1
-                if(x==6) {
+                if(x===6) {
                     break
                 }
                 // If we dont already have an entry for audiofeature create one
