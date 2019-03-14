@@ -64,7 +64,8 @@ class App extends Component {
               artistName: trackObject.artists[0].name, 
               image: trackObject.album.images[1].url,
               trackId: trackObject.id,
-              previewURL: trackObject.preview_url
+              previewURL: trackObject.preview_url,
+              uri: trackObject.uri
             })
           })
         }).then(() => { // Get audioFeatures data

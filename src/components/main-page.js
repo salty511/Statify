@@ -16,6 +16,7 @@ class MainPage extends Component {
       }
       this.onClickHandler = this.onClickHandler.bind(this)
       this.onClickHandler_Album = this.onClickHandler_Album.bind(this)
+      this.openSongInSpotify = this.openSongInSpotify.bind(this)
     }
 
     renderAlbums(dataSet) {
@@ -24,7 +25,7 @@ class MainPage extends Component {
         <div className="container">
           <div className="row">
             {albumsToRender.slice(0, 20).map((track) => {
-              return (<div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><Album trackInfo={track} onClickHandler={this.onClickHandler_Album}/></div>)
+              return (<div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6"><Album trackInfo={track} onClickHandler={this.onClickHandler_Album} onClickOpenInSpotify={this.openSongInSpotify}/></div>)
             })}
           </div>
         </div>
@@ -78,6 +79,15 @@ class MainPage extends Component {
         }
       }
       this.setState({previewURL: soundURL})
+    }
+
+    openSongInSpotify(trackURI) {
+      console.log(this.props.accessToken)
+      fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        headers: {"Authorization": "Bearer " + this.props.accessToken},
+        body: JSON.stringify({"uris": ["spotify:track:" + trackURI]})
+      })
     }
     
     render() {
