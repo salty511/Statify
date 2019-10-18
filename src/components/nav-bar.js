@@ -20,11 +20,6 @@ class NavBar extends Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/audiofeatures">
-                                    <span className="nav-link">Audio Features</span>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link to="/about">
                                     <span className="nav-link">About</span>
                                 </Link>
