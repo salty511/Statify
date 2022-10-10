@@ -25,6 +25,13 @@ class NavBar extends Component {
                                 </Link>
                             </li>
                         </ul>
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <button type="button" to="/" className="btn btn-outline-danger btn-sm" onClick={() => this.props.onClickLogout()}>
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

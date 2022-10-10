@@ -14,6 +14,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {}
+    this.onClickLogout = this.onClickLogout.bind(this)
   }
 
   componentDidMount() {
@@ -23,6 +24,10 @@ class App extends Component {
     this.getServerData(accessToken, "medium_term")
     this.getServerData(accessToken, "short_term")
     this.getServerData(accessToken, "long_term")
+  }
+
+  onClickLogout(e) {
+    this.setState({accessToken: null})
   }
 
   getServerData(accessToken, timeRange) {
@@ -141,7 +146,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar onClickLogout={this.onClickLogout}/>
           <Route exact path="/main" render={(props) => {
             return(
               <MainPage {...props} 
@@ -156,7 +161,7 @@ class App extends Component {
               <LoginPage {...props}
               accessToken={this.state.accessToken && this.state.accessToken} />
             )
-          }} />
+          }}/>
           <Route exact path="/audiofeatures" render={(props) => {
             return(
               <AudioFeaturesPage {...props}
