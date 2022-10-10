@@ -30,6 +30,8 @@ class App extends Component {
     let topArtistsCall
     let topTracksAndAudioFeaturesCall
     let userCall
+    const maxTopLine = 22
+    const maxBottomLine = 25
     if(accessToken) {
       //Get UserInfo data
       if(!this.state.user) {
@@ -58,6 +60,12 @@ class App extends Component {
         }).then((data) => {
           console.log(timeRange + ": topTracks call complete")
           serverData.topTracks = data.items.map((trackObject) => {
+            if (trackObject.name.length >= maxTopLine){
+              trackObject.name = trackObject.name.slice(0, maxTopLine - 3) + "..."
+            }
+            if ((trackObject.artists[0].name + trackObject.album.name).length >= maxBottomLine) {
+              trackObject.album.name = trackObject.album.name.slice(0, (maxBottomLine - trackObject.artists[0].name.length - 3)) + "..."
+            }
             return({
               albumName: trackObject.album.name, 
               trackName: trackObject.name, 

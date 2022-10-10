@@ -31,9 +31,9 @@ class Album extends Component {
             </div>
           </div>
           <div className="card-body">
-            <h5 className="card-title">{this.props.trackInfo.albumName}</h5>
+            <h5 className="card-title">{this.props.trackInfo.trackName}</h5>
             <h6 className="card-subtitle">
-              {this.props.trackInfo.artistName} - {this.props.trackInfo.trackName}
+              {this.props.trackInfo.artistName} - {this.props.trackInfo.albumName}
             </h6>
           </div>
         </div>
